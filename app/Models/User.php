@@ -12,6 +12,12 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+
+    // constants for user account_type
+    const INDIVIDUAL = 'Individual';
+    const BUSINESS = 'Business';
+
+
     /**
      * The attributes that are mass assignable.
      *
@@ -21,6 +27,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'account_type',
     ];
 
     /**
@@ -42,4 +49,15 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+
+    // ============= Relationships =================>
+    // user has many transactions
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
+    }
+    // ============= Relationships =================>
+
+
 }
